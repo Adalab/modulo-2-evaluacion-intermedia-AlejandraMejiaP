@@ -1,0 +1,19 @@
+body {
+    background: linear-gradient(to bottom, rgb(231, 193, 208) , rgb(247, 240, 243));
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+
+.main__div{    
+    background: #F8F1F5;
+    color:#47002D;    
+    width: 50%;
+    height: 350px;
+    margin: auto;
+    margin-top: 60px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Red Hat Display', sans-serif;
+    border-radius: 12px;
+}
