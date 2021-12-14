@@ -89,9 +89,9 @@ function reset (event) {
         }
     if (event.currentTarget === playButton){
             messageText.innerHTML = messageText.innerHTML;
-            countPlayer.innerHTML = countPlayer.innerHTML;
+            counterPlayer = 0;
             countPc.innerHTML = countPc.innerHTML;
-
+            console.log(messageText.innerHTML);
         }
 
     }
@@ -107,4 +107,5 @@ playButton.addEventListener("click", fightMoves);
 playButton.addEventListener("click", countTries);
 playButton.addEventListener("click", countingClicks);
 resetButton.addEventListener("click", reset);
+playButton.addEventListener("click", reset);
 
