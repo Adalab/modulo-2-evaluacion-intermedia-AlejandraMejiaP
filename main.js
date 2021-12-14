@@ -3,12 +3,14 @@
 /* Constante y variables */
 
 const playButton = document.querySelector(".play__button");
+const resetButton = document.querySelector(".reset__button ");
 const option = document.querySelector(".select__move");
 let messageText = document.querySelector(".message__text");
 let countPlayer = document.querySelector(".player__count");
 let countPc = document.querySelector(".pc__count");
 let counterPlayer = "";
 let counterPc = "";
+let winner = "";
 
 /* Función que genera un número aleatorio  para definir la jugada del pc*/
 let pcMove = "";
@@ -49,28 +51,54 @@ function fightMoves() {
 }
 
 /* Función del contador de la jugadora*/
-function countTries() {  
+function countTries() {
   if (messageText.innerHTML === `Has ganado`) {
-    counterPlayer ++;
+    counterPlayer++;
     countPlayer.innerHTML = `Jugador: ${counterPlayer} `;
   } else if (messageText.innerHTML === `Has perdido`) {
-    counterPc ++;
+    counterPc++;
     countPc.innerHTML = `Computadora: ${counterPc} `;
   }
 }
+/* Función que declara a la ganadora*/
+if (countPlayer > counterPc) {
+  winner = "¡¡¡Has ganado, crack!!!";
+} else if (countPlayer < counterPc) {
+  winner = "Has perdido... ¿cúantas van ya?";
+} else {
+  winner = `Habeis empatado`;
+}
+
 /* Función de reseteo a los 10 intentos */
 let clickNumber = "";
 function countingClicks(event) {
   if (event.currentTarget) {
     clickNumber++;
-   
+    if (clickNumber > 10) {
+      playButton.classList.toggle("hidden");
+      resetButton.classList.toggle("hidden");
+      messageText.innerHTML = `${winner}`;
+    }
   }
 }
-function reset() {
-  if (clickNumber > 10) {
-    location.reload();
-  }
-}
+
+function reset (event) {
+    if (event.currentTarget === resetButton) {        
+            playButton.classList.toggle("hidden");
+            resetButton.classList.toggle("hidden");   
+        }
+    if (event.currentTarget === playButton){
+            messageText.innerHTML = messageText.innerHTML;
+            countPlayer.innerHTML = countPlayer.innerHTML;
+            countPc.innerHTML = countPc.innerHTML;
+
+        }
+
+    }
+
+
+
+
 
 /* Eventos */
 playButton.addEventListener("click", getRandomNumber);
@@ -78,4 +106,5 @@ playButton.addEventListener("click", generatePcMove);
 playButton.addEventListener("click", fightMoves);
 playButton.addEventListener("click", countTries);
 playButton.addEventListener("click", countingClicks);
-playButton.addEventListener("click", reset);
+resetButton.addEventListener("click", reset);
+

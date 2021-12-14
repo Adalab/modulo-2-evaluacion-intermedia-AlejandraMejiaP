@@ -17,3 +17,7 @@ body {
     font-family: 'Red Hat Display', sans-serif;
     border-radius: 12px;
 }
+
+ .hidden {
+    display: none;
+}
