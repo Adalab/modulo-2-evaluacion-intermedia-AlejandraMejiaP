@@ -70,35 +70,32 @@ if (countPlayer > counterPc) {
 }
 
 /* Función de reseteo a los 10 intentos */
-let clickNumber = "";
-function countingClicks(event) {
-  if (event.currentTarget) {
-    clickNumber++;
-    if (clickNumber > 10) {
-      playButton.classList.toggle("hidden");
-      resetButton.classList.toggle("hidden");
-      messageText.innerHTML = `${winner}`;
-    }
-  }
-}
+// let clickNumber = "";
+// function countingClicks(event) {
+//   if (event.currentTarget) {
+//     clickNumber++;
+//     if (clickNumber > 10) {
+//       playButton.classList.toggle("hidden");
+//       resetButton.classList.toggle("hidden");
+//       messageText.innerHTML = `${winner}`;
+//     }
+//   }
+// }
 
-function reset (event) {
-    if (event.currentTarget === resetButton) {        
-            playButton.classList.toggle("hidden");
-            resetButton.classList.toggle("hidden");   
-        }
-    if (event.currentTarget === playButton){
-            messageText.innerHTML = messageText.innerHTML;
-            counterPlayer = 0;
-            countPc.innerHTML = countPc.innerHTML;
-            console.log(messageText.innerHTML);
-        }
+// function reset (event) {
+//     event.preventDefault();
+//     if (event.currentTarget === resetButton) {        
+//             playButton.classList.toggle("hidden");
+//             resetButton.classList.toggle("hidden");   
+//         }
+//     else if (event.currentTarget === playButton){
+//             messageText.innerHTML = messageText.innerHTML;
+//             countPlayer.innerHTML = countPlayer.innerHTML;
+//             countPc.innerHTML = countPc.innerHTML;
+//             console.log(messageText.innerHTML);
+//         }
 
-    }
-
-
-
-
+//     }
 
 /* Eventos */
 playButton.addEventListener("click", getRandomNumber);
@@ -106,6 +103,6 @@ playButton.addEventListener("click", generatePcMove);
 playButton.addEventListener("click", fightMoves);
 playButton.addEventListener("click", countTries);
 playButton.addEventListener("click", countingClicks);
-resetButton.addEventListener("click", reset);
-playButton.addEventListener("click", reset);
+// resetButton.addEventListener("click", reset);
+// playButton.addEventListener("click", reset);
 
