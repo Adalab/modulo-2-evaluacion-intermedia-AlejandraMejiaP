@@ -7,7 +7,8 @@ const option = document.querySelector(".select__move");
 let messageText = document.querySelector(".message__text");
 let countPlayer = document.querySelector(".player__count");
 let countPc = document.querySelector(".pc__count");
-let count = "";
+let counterPlayer = "";
+let counterPc = "";
 
 /* Función que genera un número aleatorio  para definir la jugada del pc*/
 let pcMove = "";
@@ -50,11 +51,11 @@ function fightMoves() {
 /* Función del contador de la jugadora*/
 function countTries() {  
   if (messageText.innerHTML === `Has ganado`) {
-    count++;
-    countPlayer.innerHTML = `Jugador: ${count} `;
+    counterPlayer ++;
+    countPlayer.innerHTML = `Jugador: ${counterPlayer} `;
   } else if (messageText.innerHTML === `Has perdido`) {
-    count++;
-    countPc.innerHTML = `Computadora: ${count} `;
+    counterPc ++;
+    countPc.innerHTML = `Computadora: ${counterPc} `;
   }
 }
 /* Función de reseteo a los 10 intentos */
