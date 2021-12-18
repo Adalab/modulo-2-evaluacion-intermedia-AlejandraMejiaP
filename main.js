@@ -8,8 +8,9 @@ const option = document.querySelector(".select__move");
 let messageText = document.querySelector(".message__text");
 let countPlayer = document.querySelector(".player__count");
 let countPc = document.querySelector(".pc__count");
-let counterPlayer = "";
-let counterPc = "";
+let counterPlayer = 0;
+let counterPc = 0;
+let totalCount = 0;
 let winner = "";
 
 /* Función que genera un número aleatorio  para definir la jugada del pc*/
@@ -30,45 +31,80 @@ function generatePcMove() {
 }
 
 /* Función que compara la jugada del pc con la de la usuaria*/
-
+let userMove;
 function fightMoves() {
-  let userMove = option.value;
+  userMove = option.value;
+
   if (userMove === pcMove) {
     messageText.innerHTML = `Empate`;
-  } else if (userMove === "Piedra" && pcMove === "Papel") {
-    messageText.innerHTML = `Has perdido`;
-  } else if (userMove === "Piedra" && pcMove === "Tijera") {
-    messageText.innerHTML = `Has ganado`;
-  } else if (userMove === "Papel" && pcMove === "Tijera") {
-    messageText.innerHTML = `Has perdido`;
-  } else if (userMove === "Papel" && pcMove === "Piedra") {
-    messageText.innerHTML = `Has ganado`;
-  } else if (userMove === "Tijera" && pcMove === "Piedra") {
-    messageText.innerHTML = `Has perdido`;
-  } else if (userMove === "Tijera" && pcMove === "Papel") {
-    messageText.innerHTML = `Has ganado`;
+  } else if (userMove === "Piedra") {
+    if (pcMove === "Papel") {
+      messageText.innerHTML = `Has perdido`;
+      counterPc++;
+    } else {
+      messageText.innerHTML = `Has ganado`;
+      counterPlayer++;
+    }
+  } else if (userMove === "Papel") {
+    if (pcMove === "Tijera") {
+      messageText.innerHTML = `Has perdido`;
+      counterPc++;
+    } else {
+      messageText.innerHTML = `Has ganado`;
+      counterPlayer++;
+    }
+  } else if (userMove === "Tijera") {
+    if (pcMove === "Piedra") {
+      messageText.innerHTML = `Has perdido`;
+      counterPc++;
+    } else {
+      messageText.innerHTML = `Has ganado`;
+      counterPlayer++;
+    }
+  }
+  totalCount++;
+  showScore();
+  if(totalCount >= 10) {
+    endGame();
   }
 }
 
 /* Función del contador de la jugadora*/
-function countTries() {
-  if (messageText.innerHTML === `Has ganado`) {
-    counterPlayer++;
-    countPlayer.innerHTML = `Jugador: ${counterPlayer} `;
-  } else if (messageText.innerHTML === `Has perdido`) {
-    counterPc++;
-    countPc.innerHTML = `Computadora: ${counterPc} `;
-  }
-}
-/* Función que declara a la ganadora*/
-if (countPlayer > counterPc) {
-  winner = "¡¡¡Has ganado, crack!!!";
-} else if (countPlayer < counterPc) {
-  winner = "Has perdido... ¿cúantas van ya?";
-} else {
-  winner = `Habeis empatado`;
+function showScore() {
+  countPc.innerHTML = `Jugadora: ${counterPlayer} `;
+  countPlayer.innerHTML = `Computadora: ${counterPc} `;
 }
 
+//Contador de  partidas
+function endGame() {
+  showWinner();
+  resetButton.classList.toggle("hidden");
+  playButton.classList.toggle("hidden");
+}
+
+function resetGame(event) {
+  event.preventDefault();
+  resetButton.classList.toggle("hidden");
+  playButton.classList.toggle("hidden");
+  counterPlayer = 0;
+  counterPc = 0;
+  totalCount = 0;
+  messageText.innerHTML = `Let's go!`;
+  showScore();
+}
+
+/* Función que declara a la ganadora*/
+function showWinner() {
+  
+  if (counterPlayer > counterPc) {
+    winner = "¡¡¡Has ganado, crack!!!";
+  } else if (counterPlayer < counterPc) {
+    winner = "Has perdido... ¿cúantas van ya?";
+  } else {
+    winner = `Habeis empatado`;
+  }
+  messageText.innerHTML = winner;
+}
 /* Función de reseteo a los 10 intentos */
 // let clickNumber = "";
 // function countingClicks(event) {
@@ -84,9 +120,9 @@ if (countPlayer > counterPc) {
 
 // function reset (event) {
 //     event.preventDefault();
-//     if (event.currentTarget === resetButton) {        
+//     if (event.currentTarget === resetButton) {
 //             playButton.classList.toggle("hidden");
-//             resetButton.classList.toggle("hidden");   
+//             resetButton.classList.toggle("hidden");
 //         }
 //     else if (event.currentTarget === playButton){
 //             messageText.innerHTML = messageText.innerHTML;
@@ -101,8 +137,8 @@ if (countPlayer > counterPc) {
 playButton.addEventListener("click", getRandomNumber);
 playButton.addEventListener("click", generatePcMove);
 playButton.addEventListener("click", fightMoves);
-playButton.addEventListener("click", countTries);
-playButton.addEventListener("click", countingClicks);
+resetButton.addEventListener ("click", resetGame);
+
+// playButton.addEventListener("click", countingClicks);
 // resetButton.addEventListener("click", reset);
 // playButton.addEventListener("click", reset);
-
