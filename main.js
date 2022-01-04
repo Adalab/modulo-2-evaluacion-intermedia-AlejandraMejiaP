@@ -5,6 +5,7 @@
 const playButton = document.querySelector(".play__button");
 const resetButton = document.querySelector(".reset__button ");
 const option = document.querySelector(".select__move");
+const maxGames = 10;
 let messageText = document.querySelector(".message__text");
 let countPlayer = document.querySelector(".player__count");
 let countPc = document.querySelector(".pc__count");
@@ -13,13 +14,14 @@ let counterPc = 0;
 let totalCount = 0;
 let winner = "";
 
+
 /* Función que genera un número aleatorio  para definir la jugada del pc*/
 let pcMove = "";
 function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
 function generatePcMove() {
-  pcMove = getRandomNumber(8);
+  pcMove = getRandomNumber(9);
   if (pcMove >= 0 && pcMove < 3) {
     pcMove = "Piedra";
   } else if (pcMove >= 3 && pcMove < 6) {
@@ -64,7 +66,7 @@ function fightMoves() {
   }
   totalCount++;
   showScore();
-  if(totalCount >= 10) {
+  if(totalCount >= maxGames) {
     endGame();
   }
 }
@@ -105,40 +107,9 @@ function showWinner() {
   }
   messageText.innerHTML = winner;
 }
-/* Función de reseteo a los 10 intentos */
-// let clickNumber = "";
-// function countingClicks(event) {
-//   if (event.currentTarget) {
-//     clickNumber++;
-//     if (clickNumber > 10) {
-//       playButton.classList.toggle("hidden");
-//       resetButton.classList.toggle("hidden");
-//       messageText.innerHTML = `${winner}`;
-//     }
-//   }
-// }
-
-// function reset (event) {
-//     event.preventDefault();
-//     if (event.currentTarget === resetButton) {
-//             playButton.classList.toggle("hidden");
-//             resetButton.classList.toggle("hidden");
-//         }
-//     else if (event.currentTarget === playButton){
-//             messageText.innerHTML = messageText.innerHTML;
-//             countPlayer.innerHTML = countPlayer.innerHTML;
-//             countPc.innerHTML = countPc.innerHTML;
-//             console.log(messageText.innerHTML);
-//         }
-
-//     }
 
 /* Eventos */
 playButton.addEventListener("click", getRandomNumber);
 playButton.addEventListener("click", generatePcMove);
 playButton.addEventListener("click", fightMoves);
 resetButton.addEventListener ("click", resetGame);
-
-// playButton.addEventListener("click", countingClicks);
-// resetButton.addEventListener("click", reset);
-// playButton.addEventListener("click", reset);
